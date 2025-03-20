@@ -36,8 +36,64 @@ STEP-5: Display the obtained cipher text.
 
 Program:
 
+import re
+
+def generate_matrix(key):
+   
+    key = "".join(dict.fromkeys(key.upper().replace("J", "I") + "ABCDEFGHIKLMNOPQRSTUVWXYZ"))
+    return [list(key[i:i+5]) for i in range(0, 25, 5)]
+
+def find_position(matrix, letter):
+    
+    for r, row in enumerate(matrix):
+        if letter in row:
+            return r, row.index(letter)
+    return None
+
+def playfair_cipher(text, key, encrypt=True):
+   
+    text = re.sub(r'[^A-Z]', '', text.upper().replace("J", "I"))
+    if len(text) % 2: text += 'X'
+    matrix = generate_matrix(key)
+    result, shift = "", 1 if encrypt else -1
+    
+    for i in range(0, len(text), 2):
+        a, b = text[i], text[i+1]
+        row_a, col_a = find_position(matrix, a)
+        row_b, col_b = find_position(matrix, b)
+        
+        if row_a == row_b:
+            result += matrix[row_a][(col_a + shift) % 5] + matrix[row_b][(col_b + shift) % 5]
+        elif col_a == col_b:
+            result += matrix[(row_a + shift) % 5][col_a] + matrix[(row_b + shift) % 5][col_b]
+        else:
+            result += matrix[row_a][col_b] + matrix[row_b][col_a]
+    
+    return result
+
+
+
+key = input("Enter a key:")
+
+plaintext = input("Enter a text:")
+
+encrypted = playfair_cipher(plaintext, key, True)
+
+decrypted = playfair_cipher(encrypted, key, False)
+
+
+print("Encrypted:", encrypted)
+
+print("Decrypted:", decrypted)
+
+
 
 
 
 
 Output:
+
+
+
+![Screenshot 2025-03-20 092944](https://github.com/user-attachments/assets/62ee04bf-bcf0-4c58-abc7-634d67cf6a33)
+
