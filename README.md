@@ -1,3 +1,6 @@
+## Name:Prethivirajan.L
+## Reg No:212224040251
+
 ## EX. NO:2 IMPLEMENTATION OF PLAYFAIR CIPHER
 
  
@@ -35,7 +38,7 @@ STEP-5: Display the obtained cipher text.
 
 
 Program:
-
+```
 import re
 
 def generate_matrix(key):
@@ -85,7 +88,7 @@ decrypted = playfair_cipher(encrypted, key, False)
 print("Encrypted:", encrypted)
 
 print("Decrypted:", decrypted)
-
+```
 
 
 
@@ -96,4 +99,8 @@ Output:
 
 
 ![Screenshot 2025-03-20 092944](https://github.com/user-attachments/assets/62ee04bf-bcf0-4c58-abc7-634d67cf6a33)
+
+## Result:
+
+Hence,the program is successfully verified
 
